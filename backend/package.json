@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@langchain/community": "^0.3.39",
+    "@langchain/core": "^0.3.43",
+    "@langchain/langgraph": "^0.2.62",
+    "@langchain/langgraph-cli": "^0.0.20",
+    "@langchain/openai": "^0.5.2",
+    "@supabase/supabase-js": "^2.49.4",
+    "@tsconfig/recommended": "^1.0.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.0"
+  }
+}
