@@ -53,10 +53,16 @@ export function MessageForm({ onSubmit }: MessageFormProps) {
       selectedFiles.forEach((file) => {
         formData.append("files", file);
       });
-      /* const response = await fetch("/api/upload", {
+      const response = await fetch("/api/ingest", {
         method: "POST",
         body: formData,
-      }); */
+      });
+      if (!response.ok) {
+        toast.error("ファイルのアップロードに失敗しました");
+        return;
+      }
+      toast.success("ファイルのアップロードに成功しました");
+
       setFiles((prev) => [...prev, ...selectedFiles]);
     } catch (error) {
       toast.error("ファイルのアップロードに失敗しました");
