@@ -11,9 +11,10 @@ import { FilePreview } from "./FilePreview";
 
 interface MessageFormProps {
   onSubmit?: (message: string, files: File[]) => void;
+  isLoading?: boolean;
 }
 
-export function MessageForm({ onSubmit }: MessageFormProps) {
+export function MessageForm({ onSubmit, isLoading }: MessageFormProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -116,7 +117,7 @@ export function MessageForm({ onSubmit }: MessageFormProps) {
             size="icon"
             className="rounded-none"
             onClick={() => fileInputRef.current?.click()}
-            disabled={isUploading}
+            disabled={isUploading || isLoading}
           >
             <Paperclip />
           </Button>
@@ -126,9 +127,9 @@ export function MessageForm({ onSubmit }: MessageFormProps) {
               isUploading ? "アップロード中..." : "メッセージを送信..."
             }
             className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-            disabled={isUploading}
+            disabled={isUploading || isLoading}
           />
-          <Button type="submit" size="icon" disabled={isUploading}>
+          <Button type="submit" size="icon" disabled={isUploading || isLoading}>
             <Send />
           </Button>
         </div>

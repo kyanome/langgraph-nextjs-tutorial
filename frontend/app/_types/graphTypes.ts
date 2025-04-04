@@ -1,5 +1,18 @@
 import { Document } from "@langchain/core/documents";
 
+export type documentType =
+  | PDFDocument[]
+  | { [key: string]: any }[]
+  | string[]
+  | string
+  | "delete";
+
+export interface RetrieveDocumentsNodeUpdates {
+  retrieveDocuments: {
+    documents: documentType;
+  };
+}
+
 export type PDFDocument = Document & {
   metadata?: {
     loc?: {
