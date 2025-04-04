@@ -2,15 +2,15 @@
 
 ## 概要
 
-このリポジトリは、LangChain と LangGraph を活用した PDF チャットボットエージェントの実装です。このシステムは PDF ドキュメントを取り込み、ベクトルデータベース（Supabase）に埋め込みを保存し、OpenAI（または他の LLM プロバイダー）を使用してユーザーの質問に対して関連する文脈を考慮した応答を提供します。
+このリポジトリは、LangChain と LangGraph を活用した PDF チャットボットエージェントの実装です。このシステムは PDF ドキュメントを取り込み、ベクトルデータベース（Supabase）に埋め込みを保存し、OpenAI（または他の LLM プロバイダー）を使用してユーザーの質問に対して関連する文脈を考慮し、返答を行います。(RAG)
 
 主な特徴:
 
-- **ドキュメント取り込み機能**:
-- **インテリジェントな検索**:
-- **ストリーミングレスポンス**:
-- **LangGraph ワークフロー**:
-- **Next.js フロントエンド**:
+- **ドキュメント取り込み機能**: PDF をアップロードして解析し、ベクトルデータベースに保存
+- **インテリジェントな検索**: ユーザーの質問に対して最も関連性の高いドキュメント部分を検索
+- **ストリーミングレスポンス**: サーバーからクライアント UI へのリアルタイム応答
+- **LangGraph ワークフロー**: 取り込みと検索のプロセスを視覚化可能なグラフベースのアプローチ
+- **Next.js フロントエンド**: 直感的なユーザーインターフェースでファイルのアップロードとチャット機能を提供
 
 ## インストール方法
 
@@ -31,14 +31,14 @@
 1. **リポジトリのクローン**:
 
 ```bash
-git clone https://github.com/kyanome/langgraph-nextjs-tutorial.git
-cd langgraph-nextjs-tutorial
+git clone https://github.com/yourusername/pdf-chatbot-agent.git
+cd pdf-chatbot-agent
 ```
 
 2. **依存関係のインストール**:
 
 ```bash
-npm install
+yarn install
 ```
 
 3. **環境変数の設定**:
@@ -131,50 +131,7 @@ Next.js の開発サーバーがポート 3000 で起動します。
                                                 └─────────────────────────┘
 ```
 
-### コンポーネント
-
-- **バックエンド**: Node.js/TypeScript サービス
-
-  - **取り込みグラフ** (`src/ingestion_graph.ts`) - ドキュメントのインデックス作成/取り込み
-  - **検索グラフ** (`src/retrieval_graph.ts`) - 取り込まれたドキュメントに対する質問応答
-  - **設定** (`src/shared/configuration.ts`) - モデルプロバイダーやベクトルストアの設定
-
-- **フロントエンド**: Next.js/React アプリ
-  - PDF アップロード機能
-  - リアルタイムチャットインターフェース
-  - ソース表示機能
-
-### カスタマイズ
-
-#### バックエンド
-
-- `src/shared/configuration.ts`でデフォルト設定（ベクトルストア、k 値など）を変更できます
-- `src/retrieval_graph/prompts.ts`でプロンプトを調整できます
-- 検索モデルを変更するには、`src/shared/retrieval.ts`ファイルを編集します
-
-#### フロントエンド
-
-- `app/api/ingest`ルートでファイルアップロード制限を変更できます
-- `_constants/graphConfigs.ts`でグラフ設定を変更できます
-
-## トラブルシューティング
-
-1. **.env が読み込まれない**
-
-   - バックエンドとフロントエンドの両方で.env.example を.env にコピーしたことを確認
-   - 環境変数が正しいことを確認し、開発サーバーを再起動
-
-2. **OpenAI エラー**
-
-   - `OPENAI_API_KEY`を確認。十分なクレジット/クォータがあることを確認
-
-3. **LangGraph が実行されない**
-
-   - `npm run dev`が失敗する場合は、Node バージョンが 18 以上であることを確認
-   - すべての依存関係がインストールされていることを確認
-
-4. **ネットワークエラー**
-   - フロントエンドが正しい`NEXT_PUBLIC_LANGGRAPH_API_URL`を指していることを確認
+_アーキテクチャ図は [mayooear/ai-pdf-chatbot-langchain](https://github.com/mayooear/ai-pdf-chatbot-langchain) から引用・翻訳しています。_
 
 ## 参考資料
 
@@ -182,7 +139,7 @@ Next.js の開発サーバーがポート 3000 で起動します。
 - [LangChain 公式ドキュメント](https://js.langchain.com/docs/)
 - [LangGraph 公式ドキュメント](https://langchain-ai.github.io/langgraph/)
 - [Supabase ベクトルストアドキュメント](https://js.langchain.com/docs/integrations/vectorstores/supabase/)
-- [mayooear/ai-pdf-chatbot-langchain](https://github.com/mayooear/ai-pdf-chatbot-langchain): 本プロジェクトの参考にしたオリジナルテンプレート
+- [mayooear/ai-pdf-chatbot-langchain](https://github.com/mayooear/ai-pdf-chatbot-langchain): 本プロジェクトの参考にしたオリジナルテンプレート（アーキテクチャ図を含む）
 
 ## ライセンス
 
